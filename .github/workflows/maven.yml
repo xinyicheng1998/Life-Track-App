@@ -11,12 +11,12 @@ name: Java CI with Maven
 on:
   push:
     paths:
-      - 'Project/**'
+      - 'Backend/Project/**'
       - '.github/workflows/maven.yml'
     branches: ['main']
   pull_request:
     paths:
-      - 'Project/**'
+      - 'Backend/Project/**'
       - '.github/workflows/maven.yml'
     branches: ['main']
 
@@ -36,11 +36,11 @@ jobs:
       #- name: Build with Maven
       #  run: mvn -B package --file pom.xml
       - name: Get all Maven Packages
-        working-directory: Project
+        working-directory: Backend/Project
         run: mvn package -Dmaven.test.skip=true
 
       - name: Run Maven Test
-        working-directory: Project
+        working-directory: Backend/Project
         run: mvn test
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
