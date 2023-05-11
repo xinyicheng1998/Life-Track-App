@@ -4,16 +4,25 @@ LifeTrack360 is a comprehensive lifestyle tracking app that enables users to mon
 
 With personalized profile management, daily step count monitoring, and weekly location analysis, users can make informed decisions about their diet, exercise routines, and travel plans.
 
-The app is securely deployed on AWS, ensuring a seamless user experience through any web browser. The development team utilizes Github Actions to ensure consistent testing, and building of code changes.
+The app is securely deployed on AWS using Docker and AWS ECS, ensuring a seamless user experience through any web browser. The development team utilizes Github Actions to ensure consistent testing, and building of code changes.
+
+## Tools and Frameworks
+
+- Database: DynamoDB
+- Frontend: React
+- Backend: Spring Boot
+- Deployment:
+  Utilize AWS IAM Roles
+  Frontend: docker, AWS ECS, EC2 with AWS ALB
+  Backend: docker, AWS ECS, Fargate
 
 ## Repository Structure
 
 This repository contains the source code for the LifeTrack360 app, organized into the following folders:
 
-- `frontend`: Contains the source code for the web-based user interface, including HTML, CSS, and JavaScript files.
-- `backend`: Contains the source code for the server-side logic, including database access and API implementation.
-- `.github`: Contains the configuration files for the continuous integration (CI) pipeline using Github Actions.
-- `documentation`: Contains the user stories and other project documentation.
+- `Frontend`: Contains the source code for the web-based user interface, including HTML, CSS, and JavaScript files.
+- `Backend`: Contains the source code for the server-side logic, including database access and API implementation.
+- `Backend/.github`: Contains the configuration files for the continuous integration (CI) pipeline using Github Actions.
 
 ## Getting Started
 
@@ -26,28 +35,11 @@ To set up the development environment for LifeTrack360, follow these steps:
    cd Life-Track-App
    ```
 
-2. Install dependencies for the frontend:
+2. Set up the frontend React project using your preferred IDE or build tool. Following the instruction in `Frontend`
 
-   ```
-   cd frontend
-   npm install
-   ```
+3. Set up the backend Spring Boot project using your preferred IDE or build tool, such as Maven. Following the instruction in `Backend`
 
-3. Install dependencies for the backend:
-
-   ```
-   cd backend
-   npm install
-   ```
-
-4. Create a `.env` file in the `backend` folder with the following environment variables:
-
-   ```
-   DATABASE_URL=<your_database_url>
-   JWT_SECRET=<your_jwt_secret>
-   ```
-
-5. Start the development servers:
+4. Start the development servers:
 
    - Frontend:
 
@@ -58,12 +50,7 @@ To set up the development environment for LifeTrack360, follow these steps:
 
    - Backend:
 
-     ```
-     cd backend
-     npm start
-     ```
-
-Now, you should be able to access the app at `http://localhost:3000` in your web browser.
+     Run the Spring Boot application from your IDE or using the command line with Maven or Gradle.
 
 ## Contributing
 
@@ -76,6 +63,65 @@ We welcome contributions from the community. To contribute, please follow these 
 
 Please ensure that your code follows best practices, and include any necessary tests or documentation updates.
 
-## License
+## Preview
 
-This project is licensed under the MIT License. For more information, see the [LICENSE](LICENSE) file.
+### Frontend
+
+#### Web page 1: Activity
+
+the calories spent by the given user everyday within the time range
+
+#### Web page 2：Visited times for places
+
+groups the location data by place and calculates the total time the user visited at each place within time range
+
+#### Web page 3: Longest stayed places
+
+groups the location data by place and calculates the duration the user spent at each place within time range
+
+### Backend
+
+#### Endpoints
+
+| Method | Endpoint                | Params                                         |
+| ------ | ----------------------- | ---------------------------------------------- |
+| GET    | /health-check           | null                                           |
+| GET    | /active-days            | String personId                                |
+| GET    | /most-steps             | String personId, String date, String daysAfter |
+| GET    | /all-steps              | String personId, String date, String daysAfter |
+| GET    | /longest-trips          | String personId, String date, String daysAfter |
+| GET    | /most-visited-places    | String personId, String date, String daysAfter |
+| GET    | /longest-visited-places | String personId, String date, String daysAfter |
+
+![endpoint1](img/endpoint1.jpg)
+![endpoint2](img/endpoint2.jpg)
+
+### Deployment
+
+#### Utilize AWS IAM Roles
+
+![Utilize AWS IAM Roles](img/IAM.jpg)
+
+#### Deployment Backend
+
+![Deployment Backend](img/deploy-backend.jpg)
+
+#### Deployment Frontend
+
+![Deployment Frontend](img/deploy-frontend1.jpg)
+![Deployment Frontend](img/deploy-frontend2.jpg)
+![Deployment Frontend](img/deploy-frontend3.jpg)
+
+### Code Quality
+
+#### GitHub Actions
+
+![github actions](img/GithubActions.jpg)
+
+#### CodeMR
+
+![codemr](img/codeMR.jpg)
+
+#### Unit tests
+
+![unittests](img/unittest.jpg)
